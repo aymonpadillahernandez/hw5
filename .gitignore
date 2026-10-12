@@ -1,0 +1,25 @@
+# Secrets: the real key lives only in .env, which is never committed
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Runtime files written next to the audit trail
+output/.audit_trail.lock
+output/.audit_trail.json.tmp
+output/audit_trail.unreadable-*.json
+
+# Local tool settings
+.claude/
+.DS_Store
+
+# Both databases ARE committed on purpose (data/campus_customs.db and data/campus_customs_new.db).

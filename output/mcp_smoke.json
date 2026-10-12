@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-10-12T03:46:52+00:00",
+  "vibe_coder": {
+    "app": "2.1.295 (Claude Code)",
+    "model": "claude-opus-5-5",
+    "session_id": "25aee26c-b4ad-46ae-96ef-6198238d8732",
+    "how": "interactive Claude Code session; each tool called natively from the user's prompt, output copied verbatim from the session transcript"
+  },
+  "connection": {
+    "config_file": ".mcp.json",
+    "server": "campus-customs-ops",
+    "type": "stdio",
+    "command": ".venv/bin/python",
+    "args": [
+      "mcp_server/server.py"
+    ],
+    "loaded_by_this_session_from": "the workspace folder's .mcp.json, one level above the project (same mcp_server/server.py and .venv, absolute paths)"
+  },
+  "database": "data/campus_customs_new.db",
+  "all_outputs_match_db": true,
+  "tests": [
+    {
+      "ticket": 101,
+      "prompt": "Problem 4 test 1 (ticket 101): use the campus-customs-ops MCP tool get_inventory_for_sku_size to check SKU CC-TEE-WHITE in size S and show me exactly what it returned",
+      "tool_name": "get_inventory_for_sku_size",
+      "mcp_tool_called": "mcp__campus-customs-ops__get_inventory_for_sku_size",
+      "tool_input": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S"
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-TEE-WHITE",
+        "size": "S",
+        "name": "Classic Bulldog Tee",
+        "qty": 0,
+        "location": "Aisle B",
+        "sizes_on_record": [
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "message": "0 unit(s) of CC-TEE-WHITE size S on hand."
+      },
+      "called_at": "2026-10-12T03:42:03.352Z",
+      "db_check": {
+        "query": "SELECT sku, name, size, qty, location FROM inventory WHERE sku = ? AND size = ?",
+        "params": [
+          "CC-TEE-WHITE",
+          "S"
+        ],
+        "db_row": {
+          "sku": "CC-TEE-WHITE",
+          "name": "Classic Bulldog Tee",
+          "size": "S",
+          "qty": 0,
+          "location": "Aisle B"
+        },
+        "matches": true,
+        "problems": []
+      }
+    },
+    {
+      "ticket": 102,
+      "prompt": "Problem 4 test 2 (ticket 102): use the campus-customs-ops MCP tool get_lease_details to read lease 1 and show me exactly what it returned",
+      "tool_name": "get_lease_details",
+      "mcp_tool_called": "mcp__campus-customs-ops__get_lease_details",
+      "tool_input": {
+        "lease_id": 1
+      },
+      "tool_output": {
+        "found": true,
+        "lease_id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400,
+        "next_due": "2026-09-02",
+        "notes": null,
+        "message": "Lease 1 found."
+      },
+      "called_at": "2026-10-12T03:42:47.286Z",
+      "db_check": {
+        "query": "SELECT id AS lease_id, space_name, landlord, monthly_rent, next_due, notes FROM leases WHERE id = ?",
+        "params": [
+          1
+        ],
+        "db_row": {
+          "lease_id": 1,
+          "space_name": "Chapel Street shop",
+          "landlord": "Elm City Properties",
+          "monthly_rent": 2400.0,
+          "next_due": "2026-09-02",
+          "notes": null
+        },
+        "matches": true,
+        "problems": []
+      }
+    },
+    {
+      "ticket": 103,
+      "prompt": "Problem 4 test 3 (ticket 103): use the campus-customs-ops MCP tool get_product_pricing to read SKU CC-HOOD-NAVY, show me exactly what it returned, then save the 3 tests in output/mcp_smoke.json and check every output against data/campus_customs_new.db",
+      "tool_name": "get_product_pricing",
+      "mcp_tool_called": "mcp__campus-customs-ops__get_product_pricing",
+      "tool_input": {
+        "sku": "CC-HOOD-NAVY"
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-HOOD-NAVY",
+        "unit_cost": 22,
+        "list_price": 58,
+        "message": "Pricing for CC-HOOD-NAVY found."
+      },
+      "called_at": "2026-10-12T03:43:13.590Z",
+      "db_check": {
+        "query": "SELECT sku, unit_cost, list_price FROM pricing WHERE sku = ?",
+        "params": [
+          "CC-HOOD-NAVY"
+        ],
+        "db_row": {
+          "sku": "CC-HOOD-NAVY",
+          "unit_cost": 22.0,
+          "list_price": 58.0
+        },
+        "matches": true,
+        "problems": []
+      }
+    }
+  ]
+}
